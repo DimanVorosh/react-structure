@@ -33,8 +33,6 @@ export const makeRequest = (
 ) => {
   return async (dispatch) => {
     dispatch(startLoading())
-    console.log('dsgsdgds')
-
     dispatch(action.request())
     try {
       const resp = await apiReq(payload)

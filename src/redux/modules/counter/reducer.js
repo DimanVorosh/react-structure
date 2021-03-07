@@ -8,12 +8,6 @@ const initialState = {
 
 export const counterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'increment':
-      return {
-        ...state,
-        counter: state.counter + 1
-      }
-
     case SET_BARS[REQUEST]:
       console.log('request идет')
       return { ...state }

@@ -4,20 +4,12 @@ import {
   RESET_ERRORS,
   REQUEST_ERROR
 } from './constants'
+import { createAction } from '@reduxjs/toolkit'
 
-export const startLoading = () => ({
-  type: LOADING_START
-})
+export const startLoading = createAction(LOADING_START)
 
-export const finishLoading = () => ({
-  type: LOADING_END
-})
+export const finishLoading = createAction(LOADING_END)
 
-export const resetErrors = () => ({
-  type: RESET_ERRORS
-})
+export const resetErrors = createAction(RESET_ERRORS)
 
-export const requestError = (error) => ({
-  type: REQUEST_ERROR,
-  error
-})
+export const requestError = createAction(REQUEST_ERROR)

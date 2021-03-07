@@ -1,22 +1,18 @@
 import { SET_BARS } from './actions'
 import { REQUEST, SUCCESS } from '../../constants/statuses'
+import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
   counter: 0,
   bars: []
 }
 
-export const counterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_BARS[REQUEST]:
-      console.log('request идет')
-      return { ...state }
-
-    case SET_BARS[SUCCESS]:
-      console.log(action.payload)
-      return { ...state }
-
-    default:
-      return state
+export const counterReducer = createReducer(initialState, {
+  [SET_BARS[REQUEST]]: (state) => {
+    console.log('реквест идет в сторе')
+  },
+  [SET_BARS[SUCCESS]]: (state, action) => {
+    console.log(action.payload)
+    console.log('успешный запрос в сторе')
   }
-}
+})

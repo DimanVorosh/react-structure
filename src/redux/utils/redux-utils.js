@@ -1,12 +1,7 @@
 import { REQUEST, SUCCESS, FAILURE } from '../constants/statuses'
-import {
-  startLoading,
-  finishLoading,
-  requestError
-} from '../modules/request/actions'
 
 export const action = (type, payload = {}) => {
-  return { type, payload: { ...payload } }
+  return { type, payload }
 }
 
 export const createRequestStatuses = (reqNamespace) => {
@@ -24,25 +19,41 @@ export const createStatusActions = (type) => {
   }
 }
 
-export const makeRequest = (
-  action,
+export const makeSimpleRequest = (
   apiReq,
   payload = {},
   callbackSuccess = () => {},
   callbackError = () => {}
 ) => {
-  return async (dispatch) => {
-    dispatch(startLoading())
-    dispatch(action.request())
+  return async () => {
     try {
       const resp = await apiReq(payload)
-      dispatch(action.success(resp.data))
-      callbackSuccess()
-      dispatch(finishLoading())
+      callbackSuccess(resp.data)
+    } catch (error) {
+      callbackError(error)
+    }
+  }
+}
+
+export const makeRequest = (
+  reqStatuses,
+  apiReq,
+  payload = {},
+  callbackSuccess = () => {},
+  callbackError = () => {},
+  paging = {}
+) => {
+  const action = createStatusActions(reqStatuses)
+
+  return async (dispatch) => {
+    dispatch(action.request())
+    try {
+      const resp = await apiReq(payload, paging)
+      dispatch(action.success({ data: resp.data, paging }))
+      callbackSuccess(resp.data)
     } catch (error) {
       dispatch(action.failure(error))
-      callbackError()
-      dispatch(requestError(error))
+      callbackError(error)
     }
   }
 }

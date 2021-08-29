@@ -1,35 +1,23 @@
-import logo from 'logo.svg'
-import 'App.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { getBars } from 'redux/modules/counter/actions'
-// import { getIsLoading } from ' redux/selectors/request'
-import { getIsLoading } from 'redux/selectors/request'
+import { useEffect } from 'react'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import RenderRoutes from 'router/RenderRoutes.js'
+import { getCurrentUser } from 'redux/modules/auth/actions'
+import { useDispatch } from 'react-redux'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 const App = () => {
   const dispatch = useDispatch()
-  const isLoading = useSelector(getIsLoading)
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {!isLoading ? (
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            hudsgdsgdslkg sdklg
-          </a>
-        ) : (
-          <p>Loading...</p>
-        )}
-        <p onClick={() => dispatch(getBars())}>
-          Edit <code>0</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <RenderRoutes />
+      </Switch>
+    </Router>
   )
 }
 

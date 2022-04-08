@@ -74,6 +74,30 @@ class Axios {
 
   handleErrorResponse = (error) => {
     const errorData = config.respError(error)
+    let JWT_TOKENS = JSON.parse(localStorage.getItem('JWT_KEY'))
+    if (errorData.status === 401 && JWT_TOKENS) {
+      axios
+        .post(
+          `${config.axios.baseURL}/refresh_token`,
+          {},
+          {
+            headers: {
+              Authorization: 'Bearer ' + JWT_TOKENS.refreshToken
+            }
+          }
+        )
+        .then((resp) => {
+          console.log('REFRESH_TOKEN_RESPONSE', resp)
+          localStorage.setItem(
+            'JWT_KEY',
+            JSON.stringify({
+              accessToken: resp.data.access_token,
+              refreshToken: resp.data.refresh_token
+            })
+          )
+        })
+        .catch((error) => console.log('REFRESH_TOKEN_ERROR', error.response))
+    }
 
     let errorMsg = `API response: ${error.response.config.url} with Status: ${errorData.status}`
     if (errorData.description)
@@ -85,14 +109,32 @@ class Axios {
   }
 
   async get(url, data) {
-    let resp
+    let resp, JWT_TOKENS
+    if (localStorage.JWT_KEY)
+      JWT_TOKENS = await JSON.parse(localStorage.JWT_KEY)
+
+    if (!data.headers) {
+      data.headers = {}
+    }
+
+    if (JWT_TOKENS) {
+      data.headers['Authorization'] = 'Bearer ' + JWT_TOKENS.accessToken
+    }
+
     if (!data.repeat) {
       if (!data.params) {
-        resp = await this._axios.get(url)
+        resp = await this._axios.get(url, {
+          headers: {
+            ...data.headers
+          }
+        })
       } else {
         resp = await this._axios.get(url, {
           params: {
             ...data.params
+          },
+          headers: {
+            ...data.headers
           }
         })
       }
@@ -102,39 +144,65 @@ class Axios {
           ...data.params
         },
         paramsSerializer: (params) =>
-          qs.stringify(params, { arrayFormat: 'repeat' })
+          qs.stringify(params, { arrayFormat: 'repeat' }),
+        headers: {
+          ...data.headers
+        }
       })
     }
     return resp
   }
 
-  async post(url, data, headers = null) {
-    let resp
+  async post(url, data, headers = {}) {
+    let resp, JWT_TOKENS
+    if (localStorage.JWT_KEY)
+      JWT_TOKENS = await JSON.parse(localStorage.JWT_KEY)
+    if (JWT_TOKENS) {
+      headers['Authorization'] = 'Bearer ' + JWT_TOKENS.accessToken
+    }
     if (!headers) {
       resp = await this._axios.post(url, data)
     } else {
-      resp = await this._axios.post(url, data, headers)
+      resp = await this._axios.post(url, data, {
+        headers
+      })
     }
     return resp
   }
 
-  async patch(url, data, headers = null) {
-    let resp
+  async patch(url, data, headers = {}) {
+    let resp, JWT_TOKENS
+    if (localStorage.JWT_KEY)
+      JWT_TOKENS = await JSON.parse(localStorage.JWT_KEY)
+    if (JWT_TOKENS) {
+      headers['Authorization'] = 'Bearer ' + JWT_TOKENS.accessToken
+    }
     if (!headers) {
       resp = await this._axios.patch(url, data)
     } else {
-      resp = await this._axios.patch(url, data, headers)
+      resp = await this._axios.patch(url, data, {
+        headers
+      })
     }
     return resp
   }
 
-  async delete(url) {
-    try {
-      const resp = await this._axios.delete(url)
-      return resp
-    } catch (error) {
-      return error
+  async delete(url, data, headers = {}) {
+    let resp, JWT_TOKENS
+    if (localStorage.JWT_KEY)
+      JWT_TOKENS = await JSON.parse(localStorage.JWT_KEY)
+    if (JWT_TOKENS) {
+      headers['Authorization'] = 'Bearer ' + JWT_TOKENS.accessToken
     }
+
+    if (!headers) {
+      resp = await this._axios.delete(url, data)
+    } else {
+      resp = await this._axios.delete(url, { data, headers: {
+        ...headers
+      }})
+    }
+    return resp
   }
 }
 

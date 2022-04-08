@@ -1,0 +1,133 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+$width: 320px;
+.Input__Wrapper {
+  width: $width;
+  border-bottom-color: $inputBorderColor;
+  margin-bottom: 25px;
+  margin-left: 20px;
+}
+
+.Wrapper_search {
+  svg {
+    @include symmetric-size(20px);
+
+    &:hover {
+      fill: $bg-fivefold;
+    }
+  }
+
+  input {
+    height: 48px;
+    padding-right: 47px;
+    border-width: 1px;
+    border-radius: $br-default;
+    border-color: $inputBorderColor;
+
+    &:focus {
+      border-color: $bg-fivefold;
+    }
+  }
+}
+
+@each $key, $value in (danger: $red, success: $green, active: #012869) {
+  .Wrapper_#{$key} {
+    p {
+      color: $value;
+    }
+
+    input {
+      border-bottom-color: $value
+    }
+  }
+}
+
+.Wrapper_disabled {
+  color: #bbb;
+
+  input {
+    border-color: #bbb;
+  }
+
+  svg {
+    fill: #bbb;
+  }
+}
+
+.Input__Field {
+  width: $width;
+  font-size: $fz-regular;
+  background: transparent;
+  padding: 14px 12px;
+  z-index: 98;
+  border: 0.5px solid $inputBorderColor;
+  border-bottom: 2px solid;
+  height: 53px;
+  color: #012869;
+  border-radius: 2px;
+}
+
+.Wrapper_light {
+  width: 250px;
+
+  input {
+    line-height: 0;
+    height: 48px;
+    padding: 13px 12px;
+  }
+}
+
+.Input__Label {
+  position: absolute;
+  background: $white;
+  padding-left: 6px;
+  padding-right: 8px;
+  font-size: 16px;
+  color: #bbb;
+  @include transition($transition-default);
+}
+
+.Input__Icon {
+  position: absolute;
+  top: 50%;
+  right: 17px;
+  margin-top: -10px;
+  user-select: none;
+  cursor: pointer;
+  z-index: 98;
+  @include symmetric-size(20px);
+
+  svg {
+    @include symmetric-size(20px);
+    z-index: 97;
+  }
+}
+
+.Input__Icon_active {
+  &:before {
+    position: absolute;
+    content: '';
+    min-width: 25px;
+    height: 2px;
+    background: #222222;
+    border: 1px solid #fff;
+    top: 50%;
+    left: 50%;
+    margin-left: -12.5px;
+    margin-top: -1px;
+    transform: rotate(35deg);
+    z-index: 98;
+  }
+}
+
+.Input__Message {
+  font-size: $fz-small - 2px;
+  padding: 2px;
+
+  @each $key, $value in (danger: $red, success: $green) {
+    &_#{$key} {
+      color: $value;
+    }
+  }
+}

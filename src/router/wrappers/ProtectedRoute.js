@@ -1,9 +1,10 @@
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { getUser, getIsLoadingPrivate } from 'redux/selectors/auth'
+import { getUser, getIsLoadingPrivate, getIsAuth } from 'redux/selectors/auth'
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
   const user = useSelector(getUser)
+  const isAuth = useSelector(getIsAuth)
   const isLoading = useSelector(getIsLoadingPrivate)
 
   return (
@@ -12,7 +13,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
       render={({ location }) => {
         if (isLoading) return <></>
         else {
-          return user ? (
+          return user || isAuth ? (
             <Component />
           ) : (
             <Redirect

@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
-import { ProtectedRoute } from 'router/wrappers/ProtectedRoute'
-import { AdminRoute } from 'router/wrappers/AdminRoute'
+import { ProtectedRoute } from '../router/wrappers/ProtectedRoute'
+import { AdminRoute } from '../router/wrappers/AdminRoute'
 import routes from 'router/routes'
 
 const RenderRoutes = () => {

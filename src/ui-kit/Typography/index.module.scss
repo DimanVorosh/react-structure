@@ -1,0 +1,14 @@
+@import "./src/styles/includes/variables";
+
+.Title {
+  line-height: 1;
+  font-weight: 900;
+}
+
+.Title1 {
+  font-size: $fz-big !important;
+}
+
+.Paragraph {
+  font-size: 14px;
+}

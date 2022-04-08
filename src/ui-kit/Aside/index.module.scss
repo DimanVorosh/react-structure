@@ -1,0 +1,88 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+.Aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: $bg-secondary;
+  padding: 20px 0;
+  z-index: 99;
+}
+
+.Aside__content {
+  margin-top: 100px;
+}
+
+.Aside__Resizer {
+  width: 10px;
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+  user-select: none;
+  cursor: col-resize;
+}
+
+.Aside__ItemIconBox {
+  @include symmetric-size(30px);
+
+  //&:before {
+  //  transition: .1s;
+  //  content: '';
+  //  position: absolute;
+  //  top: 0;
+  //  left: 0;
+  //  right: 0;
+  //  height: 1px;
+  //  background: $bg-secondary;
+  //  z-index: 80;
+  //}
+  //
+  //&:after {
+  //  transition: .1s;
+  //  content: '';
+  //  position: absolute;
+  //  top: 0;
+  //  left: 0;
+  //  bottom: 0;
+  //  width: 1px;
+  //  background: $bg-secondary;
+  //  z-index: 80;
+  //}
+}
+
+.Aside__Item_main {
+  @include transition(.1s);
+  width: 100%;
+  color: $c-secondary;
+  font-size: $fz-middle;
+  font-weight: 600;
+  cursor: pointer;
+
+  svg {
+    fill: #496594;
+  }
+
+  &:hover {
+    color: $c-tertiary;
+
+    svg {
+      fill: $c-tertiary;
+    }
+  }
+
+  &_active {
+    background: $bg-quaternary;
+
+    .Aside__ItemIconBox:before, .Aside__ItemIconBox:after {
+      background: $bg-quaternary;
+    }
+  }
+}
+
+.Aside__ItemIcon {
+  @include symmetric-size(30px);
+  fill: rgba(0,0,0,0);
+}

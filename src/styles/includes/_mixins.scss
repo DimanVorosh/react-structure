@@ -1,0 +1,40 @@
+@import "variables";
+
+@mixin symmetric-size($size, $minWidth: true, $minHeight: true) {
+  width: $size;
+  height: $size;
+
+  @if $minWidth == true {
+    min-width: $size;
+  }
+
+  @if $minHeight == true {
+    min-height: $size;
+  }
+}
+
+@mixin transition($value, $before: false, $after: false) {
+  transition: $value;
+
+  @if $before == true {
+    &:before {
+      transition: $value;
+    }
+  }
+
+  @if $after == true {
+    &:after {
+      transition: $value;
+    }
+  }
+}
+
+@mixin addFont($font_name, $file_name, $font_weight, $font_style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: fallback;
+    src: url("./../../assets/fonts/#{$file_name}.ttf");
+    font-weight: #{$font_weight};
+    font-style: #{$font_style};
+  }
+}

@@ -1,10 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { SET_USER } from './actions'
+import { SET_AUTH, SET_USER } from './actions'
 import { SUCCESS, FAILURE } from '../../constants/statuses'
 
 const initialState = {
   user: null,
-  authInProgress: true
+  authInProgress: true,
+  isAuth: false
 }
 
 export const authReducer = createReducer(initialState, {
@@ -16,5 +17,9 @@ export const authReducer = createReducer(initialState, {
   [SET_USER[FAILURE]]: (state, action) => {
     state.user = null
     state.authInProgress = false
+  },
+
+  [SET_AUTH[SUCCESS]]: (state, action) => {
+    state.isAuth = true
   }
 })

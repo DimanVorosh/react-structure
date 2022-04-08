@@ -1,7 +1,8 @@
 import React from 'react'
+import Button from 'ui-kit/Button'
 
 const Login = () => {
-  return <div className="App">React template</div>
+  return <div>test</div>
 }
 
 export default Login

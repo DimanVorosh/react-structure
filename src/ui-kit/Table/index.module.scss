@@ -1,0 +1,128 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+.Table {
+  width: 100%;
+  border-collapse: collapse
+}
+
+.Table__THead {
+  background: $bg-secondary;
+}
+
+.Table__Header {
+  font-size: $fz-regular;
+  color: $c-secondary;
+
+  svg {
+    @include symmetric-size(20px);
+    fill: $bg-fivefold;
+    cursor: pointer;
+    
+    &:hover {
+      fill: $bg-tertiary;
+    }
+  }
+
+  &:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.Table__Col {
+  font-size: $fz-regular;
+  border-radius: 5px;
+  font-weight: 600;
+  line-height: 24px;
+  @include transition(.1s);
+
+  svg {
+    @include symmetric-size(20px);
+    fill: $bg-fivefold;
+    cursor: pointer;
+
+    &:hover {
+      fill: $bg-tertiary;
+    }
+  }
+
+  //&:first-child {
+  //  border-bottom-left-radius: $br-default;
+  //  border-top-left-radius: $br-default;
+  //}
+  //
+  //&:last-child {
+  //  border-bottom-right-radius: $br-default;
+  //  border-top-right-radius: $br-default;
+  //}
+
+  &_highlight {
+    color: $blue;
+  }
+
+  &_ntf {
+    &:before {
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      margin-top: -3.5px;
+      @include symmetric-size(8px);
+      content: '';
+      display: block;
+      background: $bg-tertiary;
+      border-radius: $br-circle;
+    }
+  }
+
+  &_clickable {
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.Table__Row {
+  @include transition(.1s);
+  width: 100%;
+  box-shadow: inset 0px -1px 0px rgba(1, 40, 105, 0.05);
+
+  &:hover {
+    div {color: #00CCFF}
+
+    div:before {
+      background: #fff;
+      border: 2px solid $bg-tertiary;
+    }
+
+
+  }
+}
+
+.nonHighlighting ul li {
+  color: $c-primary;
+}
+
+.Table__IconWrapper {
+  background: $white;
+  padding: 2px;
+  border-radius: $br-default;
+  transition: $transition-default;
+  width: 30px;
+  cursor: pointer;
+  background: $white;
+
+  &:hover {
+    svg {
+      fill: $primary
+    }
+  }
+}
+
+.Table__Icon {
+  @include symmetric-size(20px);
+}

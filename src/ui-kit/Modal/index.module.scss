@@ -1,0 +1,74 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+
+$outSpacing: 20px;
+
+.Modal__Wrapper {
+  position: fixed;
+  top: $outSpacing;
+  left: 330px;
+  bottom: $outSpacing;
+  right: $outSpacing;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 997;
+  animation: showWrapper .15s 1 linear;
+}
+
+@keyframes showWrapper {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Modal__Inner {
+  position: fixed;
+  top: $outSpacing;
+  right: $outSpacing;
+  bottom: $outSpacing;
+  border-radius: 10px;
+  background: $white;
+  max-width: 614px;
+  min-width: 530px;
+  z-index: 998;
+  box-shadow: -6px 0px 20px rgba(1, 40, 105, 0.1);
+  animation: showInner .2s 1 ease-out;
+}
+
+@keyframes showInner {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px) scale(1);
+  }
+}
+
+.Modal__Closure {
+  @include symmetric-size(40px);
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
+  animation-delay: 2s;
+  animation: showClosure .5s 1 ease-out;
+  z-index: 96;
+
+  svg {
+    @include symmetric-size(20px);
+    fill: $c-primary
+  }
+}
+
+@keyframes showClosure {
+  100% {
+    transform: rotate(1080deg);
+  }
+}

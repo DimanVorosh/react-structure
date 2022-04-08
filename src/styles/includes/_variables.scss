@@ -1,0 +1,111 @@
+//
+//  Palette
+//
+$primary: #496594;
+$secondary: #fff;
+$darkPrimary: darken($primary, 45%);
+
+// background
+$bg-primary: #fff;
+$bg-secondary: #F2F4F8;
+$bg-tertiary: #00CCFF;
+$bg-quaternary: #DAE0EA;
+$bg-fivefold: #496594;
+
+// font
+$c-primary: #0F0F0F;
+$c-secondary: #496594;
+$c-tertiary: #00CCFF;
+
+// font
+$fontPrimary: #444;
+$fontSecondary: #559ec7;
+
+// input
+$inputBorderColor: #222;
+
+// main colors
+$black: #000;
+$white: #fff;
+$purple: #B150C4;
+$orange: #F2994A;
+$yellow: #f6ca2b;
+$red: #f15c5c;
+$green: #30B46F;
+$blue: #1ea3f3;
+$gray: #828282;
+
+$redLight: lighten($red, 20%);
+$greenLight: lighten($green, 40%);
+
+//
+// Colors map
+//
+$colors-map: (
+    blue: $blue,
+    purple: $purple,
+    orange: $orange,
+    yellow: $yellow,
+    red: $red,
+    green: $green,
+    gray: $gray,
+    black: #0F0F0F,
+    white: $white,
+    primary: $primary,
+);
+
+//
+//  Spacing
+//
+$spacer: 20px;
+$spacer-map: (
+    0: $spacer * 0,    // 0px
+    1: $spacer * 0.25,
+    2: $spacer * 0.50, // 10px
+    3: $spacer * 0.75,
+    4: $spacer,        // 20px
+    5: $spacer * 1.25,
+    6: $spacer * 1.50, // 30px
+    7: $spacer * 1.75,
+    8: $spacer * 2,    // 40px
+    9: $spacer * 2.25,
+    10: $spacer * 2.5  // 50px
+);
+
+//
+// Fonts
+//
+$primaryFont: 'Nunito Sans';
+$secondaryFont: Arial;
+$defaultFont: $primaryFont;
+
+//
+// Font sizes
+//
+$fz-ubig: 30px;
+$fz-big: 23px;
+$fz-middle: 17px;
+$fz-regular: 15px;
+$fz-small: 13px;
+$fz-map: (
+    1: $fz-small,   // 13px
+    2: $fz-regular, // 15px
+    3: $fz-middle,  // 17px
+    4: $fz-big,     // 23px
+    5: $fz-ubig     // 30px
+);
+
+//
+// border-radius
+//
+$br-default: 10px;
+$br-circle: 50%;
+$br-map: (
+    default: $br-default,
+    circle: $br-circle,
+);
+
+//
+// etc
+//
+$transition-default: .1s;

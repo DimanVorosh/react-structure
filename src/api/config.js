@@ -1,9 +1,7 @@
 const config = {
   axios: {
-    // baseURL: 'http://127.0.0.1/api',
-    // baseImgUrl: 'http://ar.local/storage'
-    baseURL: '/api',
-    baseImgUrl: '/'
+    baseURL: '/admin/api/v1',
+    baseImgUrl: '/storage'
   },
 
   respBody(response) {
@@ -17,7 +15,7 @@ const config = {
   respError(error) {
     return {
       status: error.response.status,
-      description: error.response.data.description
+      description: error.response.data.detail
     }
   }
 }

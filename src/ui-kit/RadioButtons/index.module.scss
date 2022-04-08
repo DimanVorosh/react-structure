@@ -1,0 +1,33 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+.RadioButton__Wrapper {
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.RadioButton {
+  margin: 10px;
+  cursor: pointer;
+  user-select: none
+}
+
+.RadioButton__Flag {
+  @include symmetric-size(18px);
+  border: 1px solid $inputBorderColor;
+  background: lighten($inputBorderColor, 15%);
+}
+
+.RadioButton__Flag_active {
+  &:before {
+    @include symmetric-size(10px);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    margin-top: -5px;
+    margin-left: -5px;
+    background: $primary;
+  }
+}

@@ -1,0 +1,91 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+.Icon_main {
+  @include symmetric-size(24px);
+  fill: $bg-fivefold;
+}
+
+.Open {
+  @include symmetric-size(32px);
+  transition: $transition-default;
+  cursor: pointer;
+
+  &_active {
+    background: $bg-quaternary;
+  }
+}
+
+.Open__Wrapper {
+  &:hover {
+    .Open {
+      background: $bg-quaternary;
+    }
+  }
+}
+
+.Content {
+  max-width: 320px;
+  position: fixed;
+  background: #fff;
+  border: 0.5px solid $bg-fivefold;
+  border-bottom: 2px solid $bg-fivefold;
+  border-radius: 2px;
+  z-index: 98;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -25px;
+    left: 0;
+    height: 25px;
+    width: 100%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    height: 10px;
+    width: 100%;
+  }
+}
+
+.Content__Item {
+  user-select: none;
+  font-weight: 600;
+  font-size: $fz-regular;
+  color: $c-primary;
+  line-height: 20px;
+  @include transition($transition-default);
+
+  p {
+    line-height: 0;
+  }
+
+  svg {
+    @include symmetric-size(20px);
+    fill: $bg-fivefold;
+  }
+
+  &:hover {
+    color: $c-tertiary;
+
+    svg {
+      fill: $bg-tertiary
+    }
+  }
+
+  & + & {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: $bg-quaternary;
+    }
+  }
+}

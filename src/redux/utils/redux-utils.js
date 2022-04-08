@@ -52,6 +52,7 @@ export const makeRequest = (
       dispatch(action.success({ data: resp.data, paging }))
       callbackSuccess(resp.data)
     } catch (error) {
+      console.log(error)
       dispatch(action.failure(error))
       callbackError(error)
     }

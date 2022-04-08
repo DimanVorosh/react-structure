@@ -1,0 +1,17 @@
+@import "./src/styles/includes/variables";
+
+.User__Avatar {
+  object-fit: cover;
+}
+
+.User__EditAvatar {
+  font-size: $fz-regular;
+  color: $c-primary;
+  transition: $transition-default;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: $c-tertiary;
+  }
+}

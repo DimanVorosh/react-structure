@@ -1,0 +1,154 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+$button-colors-map: (danger: $red, warning: $yellow, success: $green);
+
+%Button {
+  @include transition($transition-default, true, true);
+  width: 320px;
+  font-size: $fz-regular;
+
+  svg {
+    @include transition($transition-default);
+    @include symmetric-size(24px)
+  }
+}
+
+.Button_primary {
+  @extend %Button;
+  border: 1px solid $c-secondary;
+  background: $c-secondary;
+  color: $white;
+
+  svg {
+    fill: $white
+  }
+
+  // themes
+  @each $key, $value in $button-colors-map {
+    &.Button_#{$key} {
+      background: $value;
+      color: $white;
+      border-color: $value;
+    }
+  }
+
+  &[disabled] {
+    border-color: #686868;
+    background: #686868;
+
+    &:hover {
+      border-color: #686868;
+      background: #686868;
+    }
+  }
+}
+
+.Button_primary_hover {
+  &:hover {
+    background: #012869;
+
+    svg {
+      fill: $primary;
+    }
+  }
+
+  // themes
+  @each $key, $value in $button-colors-map {
+    &.Button_#{$key}:hover {
+      color: $value;
+      svg {
+        fill: $value
+      }
+    }
+  }
+}
+
+.Button_secondary {
+  @extend %Button;
+  border: 1px solid $c-secondary;
+  background: transparent;
+  color: $c-secondary;
+
+  svg {
+    fill: $primary
+  }
+
+  // themes
+  @each $key, $value in $button-colors-map {
+    &.Button_#{$key} {
+      color: $value;
+      border-color: $value;
+
+      svg {
+        fill: $value;
+      }
+    }
+  }
+
+  &[disabled] {
+    border-color: #686868;
+    color: #686868;
+
+    &:hover {
+      border-color: #686868;
+      color: #686868;
+      background: transparent;
+    }
+  }
+}
+
+.Button_secondary_hover {
+  &:hover {
+    background: $c-secondary;
+    color: $white;
+
+    svg {
+      fill: $white;
+    }
+  }
+
+  // themes
+  @each $key, $value in $button-colors-map {
+    &.Button_#{$key}:hover {
+      background-color: $value
+    }
+  }
+}
+
+.Button_opacityHover {
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.Button__Icon {
+  @include symmetric-size(1.3em)
+}
+
+.Button_middle {
+  width: 250px;
+}
+
+.Button_simple {
+  @include transition($transition-default);
+  color: $c-primary;
+  font-size: $fz-regular !important;
+  font-weight: 600 !important;
+  border: 0;
+  background: $white;
+  padding: 0 !important;
+
+  &:hover {
+    color: $bg-tertiary;
+
+    svg {
+      fill: $bg-tertiary
+    }
+  }
+
+  svg {
+    fill: $bg-fivefold
+  }
+}
+

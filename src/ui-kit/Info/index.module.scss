@@ -1,0 +1,37 @@
+@import "./src/styles/includes/variables";
+@import "./src/styles/includes/mixins";
+
+$info-colors-map: (danger: $red, warning: $yellow, success: $green);
+
+.Info {
+  border: 1px solid;
+  max-width: 500px;
+  font-size: $fz-regular;
+}
+
+.Info__Title {
+  font-size: 1.05em;
+}
+
+.Info__Content {
+  font-size: 0.95em;
+}
+
+.Info__Icon {
+  @include symmetric-size(38px)
+}
+
+// themes
+@each $key, $value in $info-colors-map {
+  .Info_#{$key} {
+    border-color: $value;
+
+    //.Info__Title {
+    //  color: $value;
+    //}
+
+    .Info__Icon {
+      fill: $value;
+    }
+  }
+}
